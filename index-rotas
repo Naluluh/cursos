@@ -1,0 +1,44 @@
+const express = require('express');
+const app = express()
+const port = 3000
+
+app.use(express.json())
+
+const usuarios = [
+    {nome: 'Tiago', idade: 38},
+    {nome: 'Alessandra', idade: 36},
+    {nome: 'Maria', idade: 76}
+]
+
+app.get('/', (req, res) => {
+  res.send('Home')
+})
+
+app.get('/sobre', (req, res) => {
+  res.send('Sobre')
+})
+
+app.get('/usuarios', (req, res) => {
+  res.json(usuarios)
+})
+
+app.post('/usuarios', (req, res) => {
+    usuarios.push(req.body)
+    res.json(usuarios)
+}) 
+
+app.put('/usuarios/:id', (req, res) => {
+    const { id } = req.params
+    usuarios[id] = req.body
+    res.json(usuarios)
+}) 
+
+app.delete('/usuarios/:id', (req, res) => {
+    const { id } = req.params
+    usuarios.splice(id, 1)
+    res.json(usuarios)
+}) 
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
