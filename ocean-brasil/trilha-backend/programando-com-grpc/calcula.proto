@@ -1,0 +1,12 @@
+syntax="proto3";
+package calcula; 
+service CalcularService{
+    rpc Somar(operandos) returns(resposta);
+}
+message operandos {
+    int32 x = 1;
+    int32 y = 2;
+}
+message resposta{
+    int32 res = 1;
+}
